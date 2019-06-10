@@ -1,5 +1,5 @@
 {
-  "name": "be-node-boiler-no-auth",
+  "name": "webauth-i-challenge",
   "version": "1.0.0",
   "description": "No auth node server boiler plate",
   "main": "index.js",
@@ -9,6 +9,8 @@
   "author": "Jay Maas",
   "license": "ISC",
   "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "cors": "^2.8.5",
     "dotenv": "^8.0.0",
     "express": "^4.17.1",
     "helmet": "^3.18.0",

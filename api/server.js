@@ -1,12 +1,16 @@
 const express = require('express');
 const timestamp = require('time-stamp')
+const cors = require('cors')
 
-const router = require('./routes/router.js')
+const usersRouter = require('./routes/users/router.js')
+const authRouter = require('./routes/auth/router.js')
 
 const server = express();
 
 server.use(logger)
-server.use('/api/route', router)
+server.use('/api/users', usersRouter)
+server.use('/api/restricted', authRouter)
+server.use(cors())
 
 server.get('/', (req, res) => {
     res.send(`
