@@ -9,7 +9,7 @@ const server = express();
 
 server.use(logger)
 server.use('/api/users', usersRouter)
-server.use('/api/restricted', authRouter)
+server.use('/api/auth', authRouter)
 server.use(cors())
 
 server.get('/', (req, res) => {

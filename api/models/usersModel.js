@@ -14,7 +14,7 @@ function find() {
 
 function findBy(filter) {
     return db('users')
-        .where({ filter })
+        .where(filter)
 }
 
 async function add(cohort) {

@@ -5,7 +5,7 @@ return knex.schema
         table.increments()
 
         table
-            .string('name', 128)
+            .string('username', 128)
             .notNullable()
             .unique()
 
