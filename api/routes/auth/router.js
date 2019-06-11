@@ -5,8 +5,6 @@ const Users = require('../../models/usersModel.js')
 
 const router = express.Router()
 
-router.use(express.json())
-
 router.post('/register',  async (req, res) => {
     let user = req.body
     console.log(user.password)
@@ -28,6 +26,7 @@ router.post('/login',  async (req, res) => {
         const user = await Users.findBy({ username })
         .first()
         if (user && bcrypt.compareSync(password, user.password)) {
+            req.session.username = user.username
             res.status(200).json({ message: `Welcome ${user.username}!` })
         } else {
             res.status(401).json({ message: "Invalid Credentials"})
@@ -37,4 +36,12 @@ router.post('/login',  async (req, res) => {
         res.status(500).json(error)
     }
 })
+
+router.delete('/', (req, res) => {
+    if (req.session) {
+        req.session.destroy()
+        res.status(200).json({ message: "Good Bye!"})
+    }
+})
+
 module.exports = router

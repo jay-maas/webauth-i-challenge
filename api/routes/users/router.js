@@ -5,8 +5,6 @@ const Model = require('../../models/usersModel.js')
 
 const router = express.Router()
 
-router.use(express.json())
-
 router.get('/', restricted, async (req, res) => {
     try {
         const models = await Model.find()
