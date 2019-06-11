@@ -7,11 +7,24 @@ module.exports = {
 }
 
 async function restricted(req, res, next) {
-    if (req.session && req.session.username) {
-        next()
-    } else {
-        res.status(401).json({ message: "You shall not pass!!!"})
-    }
+   const token = req.headers.authorization
+
+   if (token) {
+       jwt.verify(token, secrets.jwtSecret, (err, payload) => {
+           if (err) {
+               res.status(403).json({
+                   message: "You are not authorized"
+               })
+           } else {
+               req.userId = payload.userId
+               next()
+           }
+       })
+   } else {
+       res.status(400).json({
+           message: "No credentials provided."
+       })
+   }
 }
 
 function generateToken(user) {
