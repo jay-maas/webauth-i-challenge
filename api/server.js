@@ -4,6 +4,8 @@ const cors = require('cors')
 const session = require('express-session')
 const KnexSessionStore = require('connect-session-knex')(session)
 
+const Middleware = require('../api/middleware/authMiddleware.js')
+
 const usersRouter = require('./routes/users/router.js')
 const authRouter = require('./routes/auth/router.js')
 
@@ -35,6 +37,8 @@ server.use(session(sessionConfig))
 
 server.use('/api/users', usersRouter)
 server.use('/api/auth', authRouter)
+
+server.use('/api/users', Middleware.restricted)
 
 server.get('/', (req, res) => {
     res.send(`

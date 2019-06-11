@@ -5,7 +5,9 @@ const Model = require('../../models/usersModel.js')
 
 const router = express.Router()
 
-router.get('/', Middleware.restricted, async (req, res) => {
+router.use('/', Middleware.restricted)
+
+router.get('/', async (req, res) => {
     try {
         const models = await Model.find()
         res.status(200).json(models)
